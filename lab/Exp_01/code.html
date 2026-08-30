@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Experiment 01 - HTML5 Semantic & Form Elements | Dhruv Mehta</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px auto;
+            max-width: 900px;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        header, nav, section, article, footer, aside {
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 6px;
+        }
+
+        header {
+            background-color: #2c3e50;
+            color: white;
+        }
+
+        nav {
+            background-color: #34495e;
+        }
+
+        nav a {
+            color: white;
+            margin-right: 15px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        section {
+            background-color: #ecf0f1;
+            border: 1px solid #bdc3c7;
+        }
+
+        fieldset {
+            border: 1px solid #bdc3c7;
+            padding: 15px;
+            border-radius: 5px;
+            background-color: #fff;
+        }
+
+        legend {
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        th, td {
+            border: 1px solid #bdc3c7;
+            padding: 8px 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #34495e;
+            color: white;
+        }
+
+        footer {
+            background-color: #2c3e50;
+            color: white;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>Backend Development - Experiment 01</h1>
+        <p><strong>Student Name:</strong> Dhruv Mehta | <strong>SAP ID:</strong> 590016903 | <strong>Batch:</strong> Batch 4</p>
+    </header>
+
+    <nav>
+        <a href="#semantic-section">Semantic Elements</a>
+        <a href="#form-section">Form Elements</a>
+        <a href="#media-section">Multimedia</a>
+    </nav>
+
+    <main>
+        <!-- ===== Semantic Section ===== -->
+        <section id="semantic-section">
+            <h2>Semantic HTML5 Structure</h2>
+            <article>
+                <h3>Why Semantic HTML Matters</h3>
+                <p>
+                    Semantic HTML tags provide meaning to web page structure for both developers and browsers.
+                </p>
+
+                <aside>
+                    <p><strong>Note:</strong> Semantic tags improve accessibility and SEO because screen readers and search engines understand page structure better.</p>
+                </aside>
+
+                <blockquote>
+                    "HTML5 defines a clear, predictable structure for modern web applications."
+                </blockquote>
+
+                <details>
+                    <summary>Click to view HTML4 vs HTML5 comparison</summary>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Feature</th>
+                                <th>HTML4</th>
+                                <th>HTML5</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Structure tags</td>
+                                <td>div only</td>
+                                <td>header, nav, section, article, footer, main, aside</td>
+                            </tr>
+                            <tr>
+                                <td>Multimedia</td>
+                                <td>Requires plugins</td>
+                                <td>Native audio and video tags</td>
+                            </tr>
+                            <tr>
+                                <td>Form inputs</td>
+                                <td>text, password, etc.</td>
+                                <td>email, date, range, color, tel, url, number</td>
+                            </tr>
+                            <tr>
+                                <td>Graphics</td>
+                                <td>Not natively supported</td>
+                                <td>canvas, svg</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </details>
+            </article>
+        </section>
+
+        <!-- ===== Form Section with HTML5 input types ===== -->
+        <section id="form-section">
+            <h2>HTML5 Form Elements</h2>
+            <form action="#" method="post">
+                <fieldset>
+                    <legend>Student Registration Details</legend>
+
+                    <label for="name">Full Name:</label><br>
+                    <input type="text" id="name" name="name" value="Dhruv Mehta" required><br><br>
+
+                    <label for="sap">SAP ID:</label><br>
+                    <input type="text" id="sap" name="sap" value="590016903" required><br><br>
+
+                    <label for="email">Email:</label><br>
+                    <input type="email" id="email" name="email" placeholder="dhruvmehta357@gmail.com" required><br><br>
+
+                    <label for="password">Password:</label><br>
+                    <input type="password" id="password" name="password" minlength="6" required><br><br>
+
+                    <label for="dob">Date of Birth:</label><br>
+                    <input type="date" id="dob" name="dob"><br><br>
+
+                    <label for="phone">Phone Number:</label><br>
+                    <input type="tel" id="phone" name="phone" pattern="[0-9]{10}" placeholder="10-digit number"><br><br>
+
+                    <label for="website">Portfolio / GitHub:</label><br>
+                    <input type="url" id="website" name="website" value="https://github.com/dhruv-rgb"><br><br>
+
+                    <label for="age">Age:</label><br>
+                    <input type="number" id="age" name="age" min="16" max="60" value="20"><br><br>
+
+                    <label for="volume">Proficiency Level (range):</label><br>
+                    <input type="range" id="volume" name="volume" min="0" max="100" value="85"><br><br>
+
+                    <label for="color">Favorite Color:</label><br>
+                    <input type="color" id="color" name="color" value="#2c3e50"><br><br>
+
+                    <label for="gender">Gender:</label><br>
+                    <select id="gender" name="gender">
+                        <option value="male" selected>Male</option>
+                        <option value="female">Female</option>
+                        <option value="other">Other</option>
+                    </select><br><br>
+
+                    <label>Skills:</label><br>
+                    <input type="checkbox" id="html" name="skills" value="html" checked>
+                    <label for="html">HTML5</label>
+                    <input type="checkbox" id="css" name="skills" value="css" checked>
+                    <label for="css">CSS3</label>
+                    <input type="checkbox" id="js" name="skills" value="js" checked>
+                    <label for="js">JavaScript / Node.js</label><br><br>
+
+                    <label for="bio">Bio:</label><br>
+                    <textarea id="bio" name="bio" rows="3" cols="50" placeholder="Student in Backend Development - Batch 4"></textarea><br><br>
+
+                    <label for="score">Performance Score:</label><br>
+                    <meter id="score" min="0" max="100" value="90">90/100</meter><br><br>
+
+                    <label for="prog">Course Progress:</label><br>
+                    <progress id="prog" value="75" max="100">75%</progress><br><br>
+
+                    <input type="submit" value="Submit Form">
+                    <input type="reset" value="Reset">
+                </fieldset>
+            </form>
+        </section>
+
+        <!-- ===== Multimedia Section ===== -->
+        <section id="media-section">
+            <h2>Multimedia & Graphics</h2>
+
+            <h3>Canvas Element</h3>
+            <canvas id="myCanvas" width="400" height="120" style="border:1px solid #999; border-radius: 4px;"></canvas>
+
+            <h3>SVG Element</h3>
+            <svg width="200" height="100">
+                <circle cx="50" cy="50" r="40" stroke="#2980b9" stroke-width="4" fill="#3498db" />
+                <text x="100" y="55" fill="#2c3e50" font-size="16" font-family="Arial">SVG Demo</text>
+            </svg>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Dhruv Mehta (SAP ID: 590016903) | Backend Development</p>
+    </footer>
+
+    <script>
+        const canvas = document.getElementById('myCanvas');
+        const ctx = canvas.getContext('2d');
+        ctx.fillStyle = '#2c3e50';
+        ctx.fillRect(10, 10, 380, 100);
+        ctx.fillStyle = '#ecf0f1';
+        ctx.font = '18px Arial';
+        ctx.fillText('HTML5 Canvas - Dhruv Mehta', 30, 65);
+    </script>
+
+</body>
+
+</html>

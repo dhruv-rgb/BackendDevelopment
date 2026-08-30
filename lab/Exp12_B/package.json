@@ -1,0 +1,18 @@
+{
+  "name": "exp12_b",
+  "version": "1.0.0",
+  "description": "Experiment 12 (B) - Cookies and Sessions Demo",
+  "main": "cookie-example.js",
+  "scripts": {
+    "cookie": "node cookie-example.js",
+    "session": "node session-example.js",
+    "demo": "node session-cookie-demo/server.js"
+  },
+  "dependencies": {
+    "cookie-parser": "^1.4.7",
+    "express": "^4.19.2",
+    "express-session": "^1.18.0"
+  },
+  "author": "Dhruv Mehta",
+  "license": "ISC"
+}

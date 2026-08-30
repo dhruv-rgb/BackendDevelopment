@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home - Student Management</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; background: #f4f6f7; }
+        .card { background: white; padding: 30px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); max-width: 600px; }
+        a { display: inline-block; margin-top: 15px; padding: 10px 20px; background: #2c3e50; color: white; text-decoration: none; border-radius: 5px; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>Student Management API</h1>
+        <p><strong>Student:</strong> <%= studentName %> | <strong>SAP ID:</strong> <%= sapId %></p>
+        <p>Welcome to the backend server with Express and EJS templating engine.</p>
+        <a href="/students">View All Students</a>
+    </div>
+</body>
+</html>

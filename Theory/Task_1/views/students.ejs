@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>All Students</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; background: #f4f6f7; }
+        .card { background: white; padding: 30px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); max-width: 600px; }
+        ul { list-style: none; padding: 0; }
+        li { padding: 10px; border-bottom: 1px solid #eee; }
+        a { display: inline-block; margin-top: 15px; color: #2c3e50; font-weight: bold; text-decoration: none; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>Registered Students</h1>
+        <ul>
+            <% students.forEach(student => { %>
+                <li>
+                    <strong><%= student.name %></strong> (SAP ID: <%= student.sap_id %>) — Branch: <%= student.branch %>
+                </li>
+            <% }); %>
+        </ul>
+        <a href="/">← Back to Home</a>
+    </div>
+</body>
+</html>

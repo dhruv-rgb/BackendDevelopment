@@ -1,0 +1,14 @@
+{
+  "name": "exp12_a",
+  "version": "1.0.0",
+  "description": "Experiment 12 (A) - Express Routing & Parameters",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2"
+  },
+  "author": "Dhruv Mehta",
+  "license": "ISC"
+}
