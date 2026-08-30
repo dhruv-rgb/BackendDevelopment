@@ -23,7 +23,8 @@
 | :--- | :--- | :--- |
 | **Task 1** | Express.js & EJS Dynamic Templating API | [📂 View Task_1](./Theory/Task_1) |
 | **Task 2** | Flask (Python) RESTful API for Student Management | [📂 View Task_2](./Theory/Task_2) |
-| **Task 3** | FastAPI CRUD Endpoints with Pydantic Validation | [📂 View Task_3](./Theory/Task_3) |
+| **Task 3** | FastAPI In-Memory CRUD Endpoints & Swagger Docs | [📂 View Task_3](./Theory/Task_3) |
+| **Task 4** | Database Integration (SQLite + SQLAlchemy ORM) with FastAPI | [📂 View Task_4](./Theory/Task_4) |
 
 ---
 
@@ -62,8 +63,14 @@ cd BackendDevelopment
   cd Theory/Task_2
   python app.py
   ```
-- **Task 3 (FastAPI)**:
+- **Task 3 (FastAPI In-Memory)**:
   ```bash
   cd Theory/Task_3
+  python main.py
+  ```
+- **Task 4 (FastAPI + SQLite Database)**:
+  ```bash
+  cd Theory/Task_4
+  pip install fastapi uvicorn sqlalchemy pydantic
   python main.py
   ```
