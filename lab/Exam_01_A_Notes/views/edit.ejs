@@ -1,0 +1,64 @@
+<%- include('partials/header', { title: 'Edit Note' }) %>
+
+<div class="form-card">
+  <div class="form-header">
+    <h2>Edit Note</h2>
+    <p>Update your note details below.</p>
+  </div>
+
+  <% if (typeof error !== 'undefined' && error) { %>
+    <div class="alert alert-danger" role="alert">
+      <span>⚠️</span>
+      <span><%= error %></span>
+    </div>
+  <% } %>
+
+  <form action="/notes/<%= note._id %>/edit" method="POST">
+    <div class="form-group">
+      <label for="title" class="form-label">
+        Note Title <span class="required-star">*</span>
+      </label>
+      <input 
+        type="text" 
+        id="title" 
+        name="title" 
+        class="form-input" 
+        value="<%= note.title %>"
+        required
+      >
+    </div>
+
+    <div class="form-group">
+      <label for="category" class="form-label">Category</label>
+      <select id="category" name="category" class="form-select">
+        <% 
+          const currentCat = note.category || 'General';
+          const categories = ['Study', 'Work', 'Personal', 'Ideas', 'General'];
+        %>
+        <% categories.forEach(cat => { %>
+          <option value="<%= cat %>" <%= currentCat === cat ? 'selected' : '' %>><%= cat %></option>
+        <% }); %>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="content" class="form-label">
+        Note Content <span class="required-star">*</span>
+      </label>
+      <textarea 
+        id="content" 
+        name="content" 
+        class="form-textarea" 
+        rows="5"
+        required
+      ><%= note.content %></textarea>
+    </div>
+
+    <div class="form-actions">
+      <a href="/notes" class="btn btn-secondary">Cancel</a>
+      <button type="submit" class="btn btn-primary">Update Note</button>
+    </div>
+  </form>
+</div>
+
+<%- include('partials/footer') %>

@@ -1,0 +1,66 @@
+<%- include('partials/header', { title: 'Add New Note' }) %>
+
+<div class="form-card">
+  <div class="form-header">
+    <h2>Add New Note</h2>
+    <p>Fill out the details below to create a new note in your collection.</p>
+  </div>
+
+  <% if (typeof error !== 'undefined' && error) { %>
+    <div class="alert alert-danger" role="alert">
+      <span>⚠️</span>
+      <span><%= error %></span>
+    </div>
+  <% } %>
+
+  <form action="/notes" method="POST">
+    <div class="form-group">
+      <label for="title" class="form-label">
+        Note Title <span class="required-star">*</span>
+      </label>
+      <input 
+        type="text" 
+        id="title" 
+        name="title" 
+        class="form-input" 
+        placeholder="e.g., Backend Lab Preparation" 
+        value="<%= typeof note !== 'undefined' && note.title ? note.title : '' %>"
+        required
+      >
+    </div>
+
+    <div class="form-group">
+      <label for="category" class="form-label">Category</label>
+      <select id="category" name="category" class="form-select">
+        <% 
+          const currentCat = typeof note !== 'undefined' && note.category ? note.category : 'Study';
+          const categories = ['Study', 'Work', 'Personal', 'Ideas', 'General'];
+        %>
+        <% categories.forEach(cat => { %>
+          <option value="<%= cat %>" <%= currentCat === cat ? 'selected' : '' %>><%= cat %></option>
+        <% }); %>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="content" class="form-label">
+        Note Content <span class="required-star">*</span>
+      </label>
+      <textarea 
+        id="content" 
+        name="content" 
+        class="form-textarea" 
+        placeholder="Write your note content here..." 
+        rows="5"
+        required
+      ><%= typeof note !== 'undefined' && note.content ? note.content : '' %></textarea>
+    </div>
+
+    <div class="form-actions">
+      <a href="/notes" class="btn btn-secondary">Cancel</a>
+      <button type="submit" class="btn btn-primary">Save Note</button>
+    </div>
+  </form>
+</div>
+
+<%- include('partials/footer') %>

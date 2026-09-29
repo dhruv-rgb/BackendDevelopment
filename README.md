@@ -23,6 +23,8 @@ The GitHub Pages live deployment is available at:
 | **Exp 12 (A)** | Express.js Routing, URL Parameters & EJS Dynamic Views | [📂 View Exp12_A](./lab/Exp12_A) |
 | **Exp 12 (B)** | Cookies & Session Management Demo | [📂 View Exp12_B](./lab/Exp12_B) |
 | **Lab 13 (A)** | User Authentication & Authorization with JWT & MongoDB | [📂 View Lab_13 Part A](./lab/Lab_13/Part_A) |
+| **Exam 01** | Backend Lab Exam (Set B): "Eisenhower Todo" Matrix App (Express + EJS + MongoDB) | [📂 View Exam_01](./lab/Exam_01) |
+| **Exam 01 (A)** | Backend Lab Exam (Set A): "My Notes" Management App (Express + EJS + MongoDB) | [📂 View Exam_01_A_Notes](./lab/Exam_01_A_Notes) |
 
 ---
 
@@ -68,6 +70,12 @@ cd BackendDevelopment
 - **Lab 13 (A) (JWT & MongoDB)**:
   ```bash
   cd lab/Lab_13/Part_A
+  npm install
+  npm start
+  ```
+- **Exam 01 ("Eisenhower Todo" Matrix App - Express + EJS + MongoDB)**:
+  ```bash
+  cd lab/Exam_01
   npm install
   npm start
   ```

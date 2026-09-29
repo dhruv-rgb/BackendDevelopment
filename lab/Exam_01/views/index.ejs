@@ -1,0 +1,399 @@
+<%- include('partials/header') %>
+
+<div class="matrix-page-container">
+  <!-- Top Banner / Filter Bar -->
+  <div class="matrix-hero">
+    <div class="hero-left">
+      <h1 class="hero-title">Eisenhower Priority Matrix</h1>
+      <p class="hero-subtitle">
+        Organize tasks effectively by distinguishing between <strong>urgency</strong> and <strong>importance</strong>.
+      </p>
+    </div>
+
+    <!-- Quick Stats -->
+    <div class="matrix-stats-bar">
+      <div class="stat-pill stat-total">
+        <span class="stat-num"><%= totalCount %></span>
+        <span class="stat-lbl">Total Tasks</span>
+      </div>
+      <div class="stat-pill stat-q1">
+        <span class="stat-num"><%= q1_do.length %></span>
+        <span class="stat-lbl">Do First</span>
+      </div>
+      <div class="stat-pill stat-q2">
+        <span class="stat-num"><%= q2_schedule.length %></span>
+        <span class="stat-lbl">Schedule</span>
+      </div>
+      <div class="stat-pill stat-q3">
+        <span class="stat-num"><%= q3_delegate.length %></span>
+        <span class="stat-lbl">Delegate</span>
+      </div>
+      <div class="stat-pill stat-q4">
+        <span class="stat-num"><%= q4_eliminate.length %></span>
+        <span class="stat-lbl">Eliminate</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Filter & Action Controls -->
+  <div class="filter-controls-card">
+    <form action="/tasks" method="GET" class="filter-form">
+      <div class="filter-group">
+        <label for="categoryFilter" class="filter-label">Filter by Category:</label>
+        <div class="filter-chips">
+          <a href="/tasks" class="chip <%= selectedCategory === 'All' ? 'active' : '' %>">All</a>
+          <% categories.forEach(cat => { %>
+            <a href="/tasks?category=<%= encodeURIComponent(cat) %>" 
+               class="chip <%= selectedCategory === cat ? 'active' : '' %>">
+              <%= cat %>
+            </a>
+          <% }) %>
+        </div>
+      </div>
+
+      <div class="search-group">
+        <input 
+          type="text" 
+          name="search" 
+          placeholder="Search task title..." 
+          value="<%= searchQuery %>" 
+          class="input-search"
+        >
+        <% if (selectedCategory && selectedCategory !== 'All') { %>
+          <input type="hidden" name="category" value="<%= selectedCategory %>">
+        <% } %>
+        <button type="submit" class="btn btn-secondary btn-sm">Search</button>
+        <% if (searchQuery || (selectedCategory && selectedCategory !== 'All')) { %>
+          <a href="/tasks" class="btn btn-outline btn-sm">Reset</a>
+        <% } %>
+      </div>
+    </form>
+  </div>
+
+  <!-- The 4-Quadrant Eisenhower Matrix Grid -->
+  <div class="eisenhower-matrix-grid">
+
+    <!-- QUADRANT 1: DO (Urgent & Important) -->
+    <div class="quadrant quadrant-q1">
+      <div class="quadrant-header">
+        <div class="quadrant-title-group">
+          <div class="quadrant-badge">Q1</div>
+          <div>
+            <h2 class="quadrant-name">DO (Urgent & Important)</h2>
+            <p class="quadrant-desc">High urgency &bull; High importance &bull; Do it immediately</p>
+          </div>
+        </div>
+        <div class="quadrant-header-right">
+          <span class="count-badge"><%= q1_do.length %></span>
+          <a href="/tasks/new?urgent=true&important=true" class="btn-quadrant-add" title="Add to Do First">+</a>
+        </div>
+      </div>
+
+      <div class="task-list">
+        <% if (q1_do.length === 0) { %>
+          <div class="empty-state">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <circle cx="12" cy="12" r="10"></circle>
+              <polyline points="12 6 12 12 14 14"></polyline>
+            </svg>
+            <p>No urgent and important tasks right now.</p>
+            <a href="/tasks/new?urgent=true&important=true" class="empty-action-link">+ Add a task to DO</a>
+          </div>
+        <% } else { %>
+          <% q1_do.forEach(task => { %>
+            <div class="task-card card-q1">
+              <div class="task-card-header">
+                <h3 class="task-title"><%= task.title %></h3>
+                <span class="badge-category"><%= task.category || 'General' %></span>
+              </div>
+              
+              <% if (task.description) { %>
+                <p class="task-description"><%= task.description %></p>
+              <% } %>
+
+              <div class="task-metadata">
+                <% if (task.dueDate) { %>
+                  <div class="meta-item meta-due">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                      <line x1="16" y1="2" x2="16" y2="6"></line>
+                      <line x1="8" y1="2" x2="8" y2="6"></line>
+                      <line x1="3" y1="10" x2="21" y2="10"></line>
+                    </svg>
+                    <span>Due: <%= task.dueDate %></span>
+                  </div>
+                <% } %>
+                <div class="meta-item meta-created">
+                  <span>Created: <%= new Date(task.createdAt).toLocaleDateString() %></span>
+                </div>
+              </div>
+
+              <div class="task-actions">
+                <a href="/tasks/<%= task._id %>/edit" class="btn-action btn-edit" title="Edit Task">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 20h9"></path>
+                    <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+                  </svg>
+                  <span>Edit</span>
+                </a>
+                <form action="/tasks/<%= task._id %>/delete" method="POST" class="delete-form" onsubmit="return confirm('Are you sure you want to delete this task?');">
+                  <button type="submit" class="btn-action btn-delete" title="Delete Task">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <polyline points="3 6 5 6 21 6"></polyline>
+                      <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                    </svg>
+                    <span>Delete</span>
+                  </button>
+                </form>
+              </div>
+            </div>
+          <% }) %>
+        <% } %>
+      </div>
+    </div>
+
+    <!-- QUADRANT 2: SCHEDULE (Not Urgent & Important) -->
+    <div class="quadrant quadrant-q2">
+      <div class="quadrant-header">
+        <div class="quadrant-title-group">
+          <div class="quadrant-badge">Q2</div>
+          <div>
+            <h2 class="quadrant-name">SCHEDULE (Not Urgent & Important)</h2>
+            <p class="quadrant-desc">Low urgency &bull; High importance &bull; Plan & schedule it</p>
+          </div>
+        </div>
+        <div class="quadrant-header-right">
+          <span class="count-badge"><%= q2_schedule.length %></span>
+          <a href="/tasks/new?urgent=false&important=true" class="btn-quadrant-add" title="Add to Schedule">+</a>
+        </div>
+      </div>
+
+      <div class="task-list">
+        <% if (q2_schedule.length === 0) { %>
+          <div class="empty-state">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+              <line x1="16" y1="2" x2="16" y2="6"></line>
+              <line x1="8" y1="2" x2="8" y2="6"></line>
+              <line x1="3" y1="10" x2="21" y2="10"></line>
+            </svg>
+            <p>No scheduled strategic tasks yet.</p>
+            <a href="/tasks/new?urgent=false&important=true" class="empty-action-link">+ Add a task to SCHEDULE</a>
+          </div>
+        <% } else { %>
+          <% q2_schedule.forEach(task => { %>
+            <div class="task-card card-q2">
+              <div class="task-card-header">
+                <h3 class="task-title"><%= task.title %></h3>
+                <span class="badge-category"><%= task.category || 'General' %></span>
+              </div>
+              
+              <% if (task.description) { %>
+                <p class="task-description"><%= task.description %></p>
+              <% } %>
+
+              <div class="task-metadata">
+                <% if (task.dueDate) { %>
+                  <div class="meta-item meta-due">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                      <line x1="16" y1="2" x2="16" y2="6"></line>
+                      <line x1="8" y1="2" x2="8" y2="6"></line>
+                      <line x1="3" y1="10" x2="21" y2="10"></line>
+                    </svg>
+                    <span>Due: <%= task.dueDate %></span>
+                  </div>
+                <% } %>
+                <div class="meta-item meta-created">
+                  <span>Created: <%= new Date(task.createdAt).toLocaleDateString() %></span>
+                </div>
+              </div>
+
+              <div class="task-actions">
+                <a href="/tasks/<%= task._id %>/edit" class="btn-action btn-edit" title="Edit Task">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 20h9"></path>
+                    <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+                  </svg>
+                  <span>Edit</span>
+                </a>
+                <form action="/tasks/<%= task._id %>/delete" method="POST" class="delete-form" onsubmit="return confirm('Are you sure you want to delete this task?');">
+                  <button type="submit" class="btn-action btn-delete" title="Delete Task">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <polyline points="3 6 5 6 21 6"></polyline>
+                      <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                    </svg>
+                    <span>Delete</span>
+                  </button>
+                </form>
+              </div>
+            </div>
+          <% }) %>
+        <% } %>
+      </div>
+    </div>
+
+    <!-- QUADRANT 3: DELEGATE (Urgent & Not Important) -->
+    <div class="quadrant quadrant-q3">
+      <div class="quadrant-header">
+        <div class="quadrant-title-group">
+          <div class="quadrant-badge">Q3</div>
+          <div>
+            <h2 class="quadrant-name">DELEGATE (Urgent & Not Important)</h2>
+            <p class="quadrant-desc">High urgency &bull; Low importance &bull; Delegate or streamline</p>
+          </div>
+        </div>
+        <div class="quadrant-header-right">
+          <span class="count-badge"><%= q3_delegate.length %></span>
+          <a href="/tasks/new?urgent=true&important=false" class="btn-quadrant-add" title="Add to Delegate">+</a>
+        </div>
+      </div>
+
+      <div class="task-list">
+        <% if (q3_delegate.length === 0) { %>
+          <div class="empty-state">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+              <circle cx="9" cy="7" r="4"></circle>
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+              <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+            </svg>
+            <p>No delegation candidates currently pending.</p>
+            <a href="/tasks/new?urgent=true&important=false" class="empty-action-link">+ Add a task to DELEGATE</a>
+          </div>
+        <% } else { %>
+          <% q3_delegate.forEach(task => { %>
+            <div class="task-card card-q3">
+              <div class="task-card-header">
+                <h3 class="task-title"><%= task.title %></h3>
+                <span class="badge-category"><%= task.category || 'General' %></span>
+              </div>
+              
+              <% if (task.description) { %>
+                <p class="task-description"><%= task.description %></p>
+              <% } %>
+
+              <div class="task-metadata">
+                <% if (task.dueDate) { %>
+                  <div class="meta-item meta-due">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                      <line x1="16" y1="2" x2="16" y2="6"></line>
+                      <line x1="8" y1="2" x2="8" y2="6"></line>
+                      <line x1="3" y1="10" x2="21" y2="10"></line>
+                    </svg>
+                    <span>Due: <%= task.dueDate %></span>
+                  </div>
+                <% } %>
+                <div class="meta-item meta-created">
+                  <span>Created: <%= new Date(task.createdAt).toLocaleDateString() %></span>
+                </div>
+              </div>
+
+              <div class="task-actions">
+                <a href="/tasks/<%= task._id %>/edit" class="btn-action btn-edit" title="Edit Task">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 20h9"></path>
+                    <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+                  </svg>
+                  <span>Edit</span>
+                </a>
+                <form action="/tasks/<%= task._id %>/delete" method="POST" class="delete-form" onsubmit="return confirm('Are you sure you want to delete this task?');">
+                  <button type="submit" class="btn-action btn-delete" title="Delete Task">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <polyline points="3 6 5 6 21 6"></polyline>
+                      <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                    </svg>
+                    <span>Delete</span>
+                  </button>
+                </form>
+              </div>
+            </div>
+          <% }) %>
+        <% } %>
+      </div>
+    </div>
+
+    <!-- QUADRANT 4: ELIMINATE (Not Urgent & Not Important) -->
+    <div class="quadrant quadrant-q4">
+      <div class="quadrant-header">
+        <div class="quadrant-title-group">
+          <div class="quadrant-badge">Q4</div>
+          <div>
+            <h2 class="quadrant-name">ELIMINATE (Not Urgent & Not Important)</h2>
+            <p class="quadrant-desc">Low urgency &bull; Low importance &bull; Drop, minimize or avoid</p>
+          </div>
+        </div>
+        <div class="quadrant-header-right">
+          <span class="count-badge"><%= q4_eliminate.length %></span>
+          <a href="/tasks/new?urgent=false&important=false" class="btn-quadrant-add" title="Add to Eliminate">+</a>
+        </div>
+      </div>
+
+      <div class="task-list">
+        <% if (q4_eliminate.length === 0) { %>
+          <div class="empty-state">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <polyline points="3 6 5 6 21 6"></polyline>
+              <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+            </svg>
+            <p>Clear of unnecessary distractions!</p>
+            <a href="/tasks/new?urgent=false&important=false" class="empty-action-link">+ Add a task to ELIMINATE</a>
+          </div>
+        <% } else { %>
+          <% q4_eliminate.forEach(task => { %>
+            <div class="task-card card-q4">
+              <div class="task-card-header">
+                <h3 class="task-title"><%= task.title %></h3>
+                <span class="badge-category"><%= task.category || 'General' %></span>
+              </div>
+              
+              <% if (task.description) { %>
+                <p class="task-description"><%= task.description %></p>
+              <% } %>
+
+              <div class="task-metadata">
+                <% if (task.dueDate) { %>
+                  <div class="meta-item meta-due">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                      <line x1="16" y1="2" x2="16" y2="6"></line>
+                      <line x1="8" y1="2" x2="8" y2="6"></line>
+                      <line x1="3" y1="10" x2="21" y2="10"></line>
+                    </svg>
+                    <span>Due: <%= task.dueDate %></span>
+                  </div>
+                <% } %>
+                <div class="meta-item meta-created">
+                  <span>Created: <%= new Date(task.createdAt).toLocaleDateString() %></span>
+                </div>
+              </div>
+
+              <div class="task-actions">
+                <a href="/tasks/<%= task._id %>/edit" class="btn-action btn-edit" title="Edit Task">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 20h9"></path>
+                    <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+                  </svg>
+                  <span>Edit</span>
+                </a>
+                <form action="/tasks/<%= task._id %>/delete" method="POST" class="delete-form" onsubmit="return confirm('Are you sure you want to delete this task?');">
+                  <button type="submit" class="btn-action btn-delete" title="Delete Task">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <polyline points="3 6 5 6 21 6"></polyline>
+                      <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                    </svg>
+                    <span>Delete</span>
+                  </button>
+                </form>
+              </div>
+            </div>
+          <% }) %>
+        <% } %>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<%- include('partials/footer') %>

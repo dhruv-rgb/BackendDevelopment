@@ -1,0 +1,1024 @@
+/* ==========================================================
+   Eisenhower Todo Application - Modern Stylesheet
+   Course: Backend Development Lab Examination
+   Student: Dhruv Mehta (SAP ID: 590016903)
+   ========================================================== */
+
+:root {
+  --font-family: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  
+  /* Neutral Color Palette */
+  --bg-page: #f8fafc;
+  --bg-surface: #ffffff;
+  --text-main: #0f172a;
+  --text-secondary: #475569;
+  --text-muted: #94a3b8;
+  --border-subtle: #e2e8f0;
+  --border-focus: #3b82f6;
+
+  /* Primary Accent */
+  --primary: #4f46e5;
+  --primary-hover: #4338ca;
+  --primary-light: #eef2ff;
+
+  /* Quadrant 1: DO (Urgent & Important) - Coral/Red */
+  --q1-accent: #ef4444;
+  --q1-bg: #fff1f2;
+  --q1-border: #fecdd3;
+  --q1-badge: #ffe4e6;
+  --q1-text: #9f1239;
+
+  /* Quadrant 2: SCHEDULE (Not Urgent & Important) - Blue */
+  --q2-accent: #2563eb;
+  --q2-bg: #eff6ff;
+  --q2-border: #bfdbfe;
+  --q2-badge: #dbeafe;
+  --q2-text: #1e40af;
+
+  /* Quadrant 3: DELEGATE (Urgent & Not Important) - Amber */
+  --q3-accent: #d97706;
+  --q3-bg: #fffbeb;
+  --q3-border: #fde68a;
+  --q3-badge: #fef3c7;
+  --q3-text: #92400e;
+
+  /* Quadrant 4: ELIMINATE (Not Urgent & Not Important) - Slate */
+  --q4-accent: #64748b;
+  --q4-bg: #f8fafc;
+  --q4-border: #e2e8f0;
+  --q4-badge: #f1f5f9;
+  --q4-text: #334155;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 12px -2px rgba(0, 0, 0, 0.06), 0 2px 6px -1px rgba(0, 0, 0, 0.04);
+  --shadow-lg: 0 10px 25px -3px rgba(0, 0, 0, 0.08), 0 4px 10px -2px rgba(0, 0, 0, 0.04);
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-full: 9999px;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-family);
+  background-color: var(--bg-page);
+  color: var(--text-main);
+  line-height: 1.5;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ==========================================================
+   Header & Navbar
+   ========================================================== */
+.app-header {
+  background: var(--bg-surface);
+  border-bottom: 1px solid var(--border-subtle);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  box-shadow: var(--shadow-sm);
+}
+
+.header-container {
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: 0.85rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.brand-link {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  text-decoration: none;
+  color: inherit;
+}
+
+.brand-icon {
+  width: 42px;
+  height: 42px;
+  background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+  color: #fff;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 10px rgba(79, 70, 229, 0.3);
+}
+
+.brand-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.brand-title {
+  font-size: 1.15rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--text-main);
+}
+
+.brand-subtitle {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.student-pill {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  background: #f1f5f9;
+  padding: 0.4rem 0.8rem;
+  border-radius: var(--radius-full);
+  font-size: 0.8rem;
+  border: 1px solid var(--border-subtle);
+}
+
+.student-pill .dot {
+  width: 8px;
+  height: 8px;
+  background: #10b981;
+  border-radius: 50%;
+}
+
+.student-name {
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+.student-sap {
+  color: var(--text-secondary);
+  font-family: monospace;
+}
+
+/* ==========================================================
+   Buttons
+   ========================================================== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  font-family: inherit;
+  font-size: 0.875rem;
+  font-weight: 600;
+  padding: 0.55rem 1.1rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid transparent;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.15s ease-in-out;
+}
+
+.btn-primary {
+  background: var(--primary);
+  color: #fff;
+  box-shadow: 0 2px 6px rgba(79, 70, 229, 0.25);
+}
+
+.btn-primary:hover {
+  background: var(--primary-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(79, 70, 229, 0.35);
+}
+
+.btn-secondary {
+  background: #e2e8f0;
+  color: var(--text-main);
+}
+
+.btn-secondary:hover {
+  background: #cbd5e1;
+}
+
+.btn-outline {
+  background: transparent;
+  border-color: var(--border-subtle);
+  color: var(--text-secondary);
+}
+
+.btn-outline:hover {
+  background: #f1f5f9;
+  color: var(--text-main);
+}
+
+.btn-sm {
+  padding: 0.38rem 0.75rem;
+  font-size: 0.8rem;
+}
+
+.btn-lg {
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+}
+
+/* ==========================================================
+   Main Content Layout
+   ========================================================== */
+.main-content {
+  flex: 1;
+  padding: 1.5rem;
+  max-width: 1360px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* ==========================================================
+   Eisenhower Matrix Page
+   ========================================================== */
+.matrix-page-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.matrix-hero {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 1.25rem 1.5rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.hero-title {
+  font-size: 1.5rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--text-main);
+  margin-bottom: 0.25rem;
+}
+
+.hero-subtitle {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+.matrix-stats-bar {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.stat-pill {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0.45rem 0.9rem;
+  border-radius: var(--radius-sm);
+  min-width: 72px;
+  text-align: center;
+}
+
+.stat-num {
+  font-size: 1.25rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.stat-lbl {
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-top: 0.2rem;
+}
+
+.stat-total { background: #f1f5f9; color: var(--text-main); }
+.stat-q1 { background: var(--q1-bg); color: var(--q1-text); border: 1px solid var(--q1-border); }
+.stat-q2 { background: var(--q2-bg); color: var(--q2-text); border: 1px solid var(--q2-border); }
+.stat-q3 { background: var(--q3-bg); color: var(--q3-text); border: 1px solid var(--q3-border); }
+.stat-q4 { background: var(--q4-bg); color: var(--q4-text); border: 1px solid var(--q4-border); }
+
+/* ==========================================================
+   Filter & Controls
+   ========================================================== */
+.filter-controls-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 0.9rem 1.25rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.filter-form {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.filter-group {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.filter-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.filter-chips {
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+}
+
+.chip {
+  padding: 0.3rem 0.75rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  border-radius: var(--radius-full);
+  text-decoration: none;
+  background: #f1f5f9;
+  color: var(--text-secondary);
+  border: 1px solid transparent;
+  transition: all 0.15s ease;
+}
+
+.chip:hover {
+  background: #e2e8f0;
+  color: var(--text-main);
+}
+
+.chip.active {
+  background: var(--primary);
+  color: #fff;
+  box-shadow: 0 2px 4px rgba(79, 70, 229, 0.25);
+}
+
+.search-group {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.input-search {
+  padding: 0.4rem 0.85rem;
+  font-size: 0.85rem;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  font-family: inherit;
+  width: 200px;
+  transition: border-color 0.15s;
+}
+
+.input-search:focus {
+  outline: none;
+  border-color: var(--primary);
+}
+
+/* ==========================================================
+   The 2x2 Eisenhower Matrix Grid
+   ========================================================== */
+.eisenhower-matrix-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.25rem;
+}
+
+.quadrant {
+  background: var(--bg-surface);
+  border-radius: var(--radius-md);
+  border: 2px solid transparent;
+  display: flex;
+  flex-direction: column;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  min-height: 380px;
+}
+
+.quadrant:hover {
+  box-shadow: var(--shadow-md);
+}
+
+/* Quadrant Specific Themes */
+.quadrant-q1 {
+  border-color: var(--q1-border);
+}
+.quadrant-q1 .quadrant-header {
+  background: var(--q1-bg);
+  border-bottom: 1px solid var(--q1-border);
+}
+.quadrant-q1 .quadrant-badge {
+  background: var(--q1-accent);
+  color: #fff;
+}
+.quadrant-q1 .count-badge {
+  background: var(--q1-badge);
+  color: var(--q1-text);
+}
+.quadrant-q1 .btn-quadrant-add {
+  background: var(--q1-accent);
+  color: #fff;
+}
+
+.quadrant-q2 {
+  border-color: var(--q2-border);
+}
+.quadrant-q2 .quadrant-header {
+  background: var(--q2-bg);
+  border-bottom: 1px solid var(--q2-border);
+}
+.quadrant-q2 .quadrant-badge {
+  background: var(--q2-accent);
+  color: #fff;
+}
+.quadrant-q2 .count-badge {
+  background: var(--q2-badge);
+  color: var(--q2-text);
+}
+.quadrant-q2 .btn-quadrant-add {
+  background: var(--q2-accent);
+  color: #fff;
+}
+
+.quadrant-q3 {
+  border-color: var(--q3-border);
+}
+.quadrant-q3 .quadrant-header {
+  background: var(--q3-bg);
+  border-bottom: 1px solid var(--q3-border);
+}
+.quadrant-q3 .quadrant-badge {
+  background: var(--q3-accent);
+  color: #fff;
+}
+.quadrant-q3 .count-badge {
+  background: var(--q3-badge);
+  color: var(--q3-text);
+}
+.quadrant-q3 .btn-quadrant-add {
+  background: var(--q3-accent);
+  color: #fff;
+}
+
+.quadrant-q4 {
+  border-color: var(--q4-border);
+}
+.quadrant-q4 .quadrant-header {
+  background: var(--q4-bg);
+  border-bottom: 1px solid var(--q4-border);
+}
+.quadrant-q4 .quadrant-badge {
+  background: var(--q4-accent);
+  color: #fff;
+}
+.quadrant-q4 .count-badge {
+  background: var(--q4-badge);
+  color: var(--q4-text);
+}
+.quadrant-q4 .btn-quadrant-add {
+  background: var(--q4-accent);
+  color: #fff;
+}
+
+/* Quadrant Header */
+.quadrant-header {
+  padding: 0.9rem 1.25rem;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.quadrant-title-group {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.quadrant-badge {
+  font-size: 0.8rem;
+  font-weight: 800;
+  padding: 0.25rem 0.55rem;
+  border-radius: var(--radius-sm);
+  letter-spacing: 0.03em;
+}
+
+.quadrant-name {
+  font-size: 1rem;
+  font-weight: 800;
+  color: var(--text-main);
+  line-height: 1.2;
+}
+
+.quadrant-desc {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.quadrant-header-right {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.count-badge {
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 0.2rem 0.55rem;
+  border-radius: var(--radius-full);
+}
+
+.btn-quadrant-add {
+  width: 28px;
+  height: 28px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  font-size: 1.1rem;
+  font-weight: 700;
+  line-height: 1;
+  transition: opacity 0.15s, transform 0.15s;
+}
+
+.btn-quadrant-add:hover {
+  opacity: 0.85;
+  transform: scale(1.05);
+}
+
+/* ==========================================================
+   Task List inside Quadrant
+   ========================================================== */
+.task-list {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  flex: 1;
+  overflow-y: auto;
+}
+
+.task-card {
+  background: #ffffff;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: 1rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  transition: box-shadow 0.15s, transform 0.15s;
+}
+
+.task-card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-1px);
+}
+
+.task-card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.task-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-main);
+  line-height: 1.3;
+}
+
+.badge-category {
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 0.2rem 0.5rem;
+  border-radius: var(--radius-full);
+  background: #f1f5f9;
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+
+.task-description {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  line-height: 1.45;
+  white-space: pre-wrap;
+}
+
+.task-metadata {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.meta-item {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.meta-due {
+  color: #d97706;
+  font-weight: 600;
+}
+
+.task-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  padding-top: 0.4rem;
+  border-top: 1px dashed var(--border-subtle);
+}
+
+.btn-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.3rem 0.6rem;
+  border-radius: 6px;
+  border: 1px solid var(--border-subtle);
+  background: #f8fafc;
+  color: var(--text-secondary);
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.btn-action:hover {
+  background: #e2e8f0;
+  color: var(--text-main);
+}
+
+.btn-edit:hover {
+  background: var(--primary-light);
+  color: var(--primary);
+  border-color: #c7d2fe;
+}
+
+.btn-delete:hover {
+  background: #fee2e2;
+  color: #b91c1c;
+  border-color: #fca5a5;
+}
+
+.delete-form {
+  display: inline;
+  margin: 0;
+  padding: 0;
+}
+
+/* Empty States */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 2.5rem 1.5rem;
+  color: var(--text-muted);
+  flex: 1;
+}
+
+.empty-state svg {
+  margin-bottom: 0.75rem;
+  opacity: 0.6;
+}
+
+.empty-state p {
+  font-size: 0.85rem;
+  margin-bottom: 0.5rem;
+}
+
+.empty-action-link {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--primary);
+  text-decoration: none;
+}
+
+.empty-action-link:hover {
+  text-decoration: underline;
+}
+
+/* ==========================================================
+   Forms (Add Task & Edit Task)
+   ========================================================== */
+.form-page-container {
+  max-width: 680px;
+  margin: 1.5rem auto;
+}
+
+.form-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 2rem;
+  box-shadow: var(--shadow-md);
+}
+
+.form-header {
+  margin-bottom: 1.75rem;
+}
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--primary);
+  text-decoration: none;
+  margin-bottom: 1rem;
+}
+
+.back-link:hover {
+  text-decoration: underline;
+}
+
+.form-title {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--text-main);
+  letter-spacing: -0.02em;
+}
+
+.form-subtitle {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  margin-top: 0.25rem;
+}
+
+.alert-error {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: #fee2e2;
+  border: 1px solid #fca5a5;
+  color: #991b1b;
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius-sm);
+  margin-bottom: 1.5rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.task-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.form-row {
+  display: flex;
+  gap: 1rem;
+}
+
+.col-half {
+  flex: 1;
+}
+
+.form-label {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.form-label.required::after {
+  content: " *";
+  color: var(--q1-accent);
+}
+
+.form-hint {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.form-control {
+  width: 100%;
+  padding: 0.65rem 0.9rem;
+  font-size: 0.9rem;
+  font-family: inherit;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  background: #ffffff;
+  color: var(--text-main);
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15);
+}
+
+/* Checkbox Cards for Urgency & Importance */
+.checkbox-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+.checkbox-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  border: 1.5px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: 0.9rem;
+  cursor: pointer;
+  background: #f8fafc;
+  transition: all 0.15s ease;
+}
+
+.checkbox-card:hover {
+  border-color: #cbd5e1;
+  background: #ffffff;
+}
+
+.checkbox-card input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--primary);
+  margin-top: 0.15rem;
+  cursor: pointer;
+}
+
+.checkbox-card-body {
+  display: flex;
+  flex-direction: column;
+}
+
+.checkbox-card-title {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.checkbox-card-desc {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  line-height: 1.35;
+  margin-top: 0.15rem;
+}
+
+/* Dynamic Live Matrix Preview Banner */
+.matrix-preview-banner {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 0.85rem 1.15rem;
+  border-radius: var(--radius-sm);
+  border: 1.5px solid transparent;
+  transition: all 0.2s ease;
+}
+
+.preview-icon {
+  font-size: 1.4rem;
+}
+
+.preview-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.preview-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-weight: 600;
+  opacity: 0.85;
+}
+
+.matrix-preview-banner strong {
+  font-size: 0.875rem;
+  font-weight: 700;
+}
+
+.preview-q1 {
+  background: var(--q1-bg);
+  border-color: var(--q1-border);
+  color: var(--q1-text);
+}
+
+.preview-q2 {
+  background: var(--q2-bg);
+  border-color: var(--q2-border);
+  color: var(--q2-text);
+}
+
+.preview-q3 {
+  background: var(--q3-bg);
+  border-color: var(--q3-border);
+  color: var(--q3-text);
+}
+
+.preview-q4 {
+  background: var(--q4-bg);
+  border-color: var(--q4-border);
+  color: var(--q4-text);
+}
+
+.form-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+/* ==========================================================
+   Footer
+   ========================================================== */
+.app-footer {
+  background: var(--bg-surface);
+  border-top: 1px solid var(--border-subtle);
+  padding: 1.25rem 1.5rem;
+  margin-top: auto;
+}
+
+.footer-container {
+  max-width: 1360px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  font-size: 0.825rem;
+  color: var(--text-secondary);
+}
+
+.footer-sub {
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  margin-top: 0.15rem;
+}
+
+.footer-credits code {
+  background: #f1f5f9;
+  padding: 0.15rem 0.4rem;
+  border-radius: 4px;
+  font-weight: 600;
+}
+
+/* ==========================================================
+   Responsive Media Queries
+   ========================================================== */
+@media (max-width: 900px) {
+  .eisenhower-matrix-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .header-container {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .header-actions {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .checkbox-cards-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .form-row {
+    flex-direction: column;
+  }
+}
