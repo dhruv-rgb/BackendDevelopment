@@ -1,0 +1,9 @@
+[project]
+name = "backend-exp15b"
+version = "1.0.0"
+description = "Multi-app Django task and student API demo"
+requires-python = ">=3.11"
+dependencies = ["Django>=5.0,<6.0"]
+
+[tool.uv]
+package = false

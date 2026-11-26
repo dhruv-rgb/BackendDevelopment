@@ -1,0 +1,5 @@
+* { box-sizing: border-box; }
+body { margin: 0; padding: 2rem; font: 1rem/1.6 system-ui, sans-serif; background: #eef2f7; color: #172033; }
+.card { max-width: 42rem; margin: 4vh auto; padding: 2rem; background: white; border-radius: 1rem; box-shadow: 0 1rem 3rem #15213a18; }
+.eyebrow { color: #5668d8; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; }
+a { color: #3448c5; }

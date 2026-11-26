@@ -1,9 +1,5 @@
-# Experiment 12 (A): Advanced Backend Integration - Part A
+# Experiment 12(A): Express routes and dynamic views
 
-## Objective
-Advanced backend integration concepts and middleware implementation.
+This project demonstrates an Express server, route parameters, query parameters, and EJS rendering. Run `npm install` and `npm start` from this folder, then open the local URL printed by the server. Review `app.js` and the `views/` directory to trace the request data into the rendered page.
 
-## Implementation
-Add your code files in this directory.
-
-[🔙 Back to Main Index](../../README.md)
+[Back to lab index](../README.md)

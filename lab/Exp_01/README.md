@@ -1,9 +1,5 @@
-# Experiment 01: Introduction & Environment Setup
+# Experiment 01: HTML5 structure and forms
 
-## Objective
-To understand backend architecture, setup runtime environment, and build a basic server.
+Open `code.html` directly in a browser. The page demonstrates semantic landmarks, navigation, an article and aside, a data table, form controls, and native disclosure elements. No dependencies or server are needed.
 
-## Implementation
-Add your code files in this directory.
-
-[🔙 Back to Main Index](../../README.md)
+[Back to lab index](../README.md)

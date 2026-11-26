@@ -2,11 +2,17 @@ const express = require('express');
 const session = require('express-session');
 
 const app = express();
+const sessionSecret = process.env.SESSION_SECRET;
+
+if (!sessionSecret) {
+    throw new Error('Set SESSION_SECRET before starting the session demo.');
+}
 
 app.use(session({
-    secret: 'dhruv_secret_key_590016903',
+    secret: sessionSecret,
     resave: false,
-    saveUninitialized: true
+    saveUninitialized: false,
+    cookie: { httpOnly: true, sameSite: 'lax', secure: process.env.NODE_ENV === 'production' }
 }));
 
 app.get('/', (req, res) => {

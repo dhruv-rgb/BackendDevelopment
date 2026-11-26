@@ -4,16 +4,21 @@ const cookieParser = require('cookie-parser');
 
 const app = express();
 const PORT = 3000;
+const sessionSecret = process.env.SESSION_SECRET;
+
+if (!sessionSecret) {
+    throw new Error('Set SESSION_SECRET before starting the session demo.');
+}
 
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 
 // Session middleware
 app.use(session({
-    secret: 'dhruv_mehta_session_secret_590016903',
+    secret: sessionSecret,
     resave: false,
-    saveUninitialized: true,
-    cookie: { maxAge: 60000 } // 1 minute expiry
+    saveUninitialized: false,
+    cookie: { maxAge: 60000, httpOnly: true, sameSite: 'lax', secure: process.env.NODE_ENV === 'production' }
 }));
 
 // Home route

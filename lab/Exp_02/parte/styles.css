@@ -1,0 +1,9 @@
+* { box-sizing: border-box; }
+body { margin: 0; font: 1rem/1.5 system-ui,sans-serif; color: #1d2d40; }
+header { display: flex; align-items: center; justify-content: space-between; padding: 1rem max(1rem,calc((100vw - 60rem)/2)); background: #153754; color: white; }
+nav { display: flex; gap: 1rem; }
+nav a { color: inherit; }
+main { max-width: 60rem; margin: 2rem auto; padding-inline: 1rem; }
+.flex { display: flex; flex-wrap: wrap; gap: .75rem; }
+.flex span, article { padding: 1rem; background: #edf3fa; border-radius: .6rem; }
+.grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(12rem,1fr)); gap: 1rem; }

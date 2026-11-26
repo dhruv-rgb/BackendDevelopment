@@ -1,0 +1,10 @@
+body { margin: 2rem; font: 1rem/1.6 system-ui,sans-serif; color: #202a3c; }
+main { max-width: 46rem; margin: auto; }
+.label { color: #215e9a; font-weight: 700; }
+#search { display: block; padding: .7rem; border: 1px solid #8795aa; border-radius: .4rem; }
+#search:focus { outline: 3px solid #8ac9ff; }
+li { margin-block: .4rem; }
+.highlight { color: #a13921; font-weight: 700; }
+[data-kind="special"] { background: #fff0c9; width: fit-content; }
+li::marker { color: #4766c4; }
+button:hover, button:focus-visible { background: #172b56; color: white; }

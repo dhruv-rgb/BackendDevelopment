@@ -1,0 +1,6 @@
+body { margin: 3rem; font: 1rem/1.6 system-ui,sans-serif; color: #263348; }
+button { padding: .8rem 1.2rem; border: 0; border-radius: .5rem; background: #315bb6; color: white; transition: transform .2s ease,background .2s ease; }
+button:hover, button:focus-visible { transform: translateY(-3px); background: #1f3977; }
+.pulse { width: 2rem; height: 2rem; margin-block: 2rem; border-radius: 50%; background: #cb553b; animation: pulse 1.6s ease-in-out infinite alternate; }
+@keyframes pulse { to { transform: scale(1.5); opacity: .45; } }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition-duration: .01ms !important; } }
